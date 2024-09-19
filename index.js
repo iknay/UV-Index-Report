@@ -39,9 +39,7 @@ app.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error(error.message);
-    res
-      .status(500)
-      .render("error", { error: "An error occurred while fetching UV data" });
+    res.status(500);
   }
 });
 
