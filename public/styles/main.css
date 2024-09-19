@@ -1,0 +1,282 @@
+:root {
+  height: 100vh;
+  width: 100vw;
+  margin: 20px;
+  /* --card-height: 60vh;
+  --card-width: calc(var(--card-height)); */
+  font-family: "Inter";
+  line-height: 0%;
+  color: #282828;
+
+  --uv-low: green;
+  --uv-moderate: #e7c712;
+  --uv-high: orange;
+  --uv-very-high: rgb(193, 50, 50);
+  --uv-extreme: purple;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background: #fbffe7;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+h1 {
+  color: rgb(26, 26, 26);
+  /* margin-bottom: 20px; */
+}
+.card {
+  position: absolute;
+  z-index: -1;
+  top: -140px;
+  left: -80px;
+  width: 500px;
+  height: 500px;
+  border-radius: 1000px;
+}
+
+.card::after {
+  border-radius: 100%;
+  position: absolute;
+  content: "";
+  top: calc(200px / 6);
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  transform: scale(0.8);
+  filter: blur(calc(500px / 6));
+  background-image: linear-gradient(
+    var(--rotate),
+    #f7ff5d,
+    #e3dd3c 43%,
+    #c27100
+  );
+  opacity: 1;
+  transition: opacity 0.5s;
+  animation: spin 2.5s linear infinite;
+}
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+/* a {
+  color: #212534;
+  text-decoration: none;
+  font-family: sans-serif;
+  font-weight: bold;
+  margin-top: 2rem;
+} */
+
+.user {
+  color: rgb(21, 21, 21);
+  font-size: 24px;
+}
+
+.location {
+  margin-top: 16px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+}
+
+.uv-index-container {
+  margin-top: 80px;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  border: 1px solid rgb(159, 159, 159);
+}
+
+.uv-index {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0px;
+  padding: 24px 32px;
+  border-radius: 12px;
+}
+
+.uv-index.low {
+  background-color: green;
+  color: white;
+}
+
+.uv-index.moderate {
+  background-color: #e7c712; /* Mustard yellow */
+}
+
+.uv-index.high {
+  background-color: orange;
+}
+
+.uv-index.very-high {
+  background-color: rgb(193, 50, 50);
+  color: white;
+}
+
+.uv-index.extreme {
+  background-color: purple;
+  color: white;
+}
+
+.uv-index-label {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 24px;
+}
+
+.uv-index-value {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.legend {
+  margin-top: 40px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.legend-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 8px;
+}
+
+.legend-items button:nth-child(1) {
+  background-color: green; /* Low */
+  color: white;
+  padding: 16px 24px;
+  border-radius: 4px;
+  border: none;
+}
+
+.legend-items button:nth-child(2) {
+  background-color: #e7c712; /* Moderate */
+  padding: 16px 24px;
+  border-radius: 4px;
+  color: white;
+  border: none;
+}
+
+.legend-items button:nth-child(3) {
+  background-color: orange; /* High */
+  padding: 16px 24px;
+  border-radius: 4px;
+  color: white;
+  border: none;
+}
+
+.legend-items button:nth-child(4) {
+  background-color: rgb(193, 50, 50); /* Very High */
+  color: white;
+  padding: 16px 24px;
+  border-radius: 4px;
+  border: none;
+}
+
+.legend-items button:nth-child(5) {
+  background-color: purple; /* Extreme */
+  color: white;
+  padding: 16px 24px;
+  border-radius: 4px;
+  border: none;
+}
+
+.legend-button {
+  padding: 5px 10px;
+  margin: 5px;
+  border: none;
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.description {
+  display: none;
+  flex-direction: column;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  line-height: normal;
+}
+
+.description.active {
+  display: block;
+}
+
+.legend-descriptions {
+  width: 90%; /* Change from 100vw to percentage */
+  max-width: 580px; /* Add a max-width */
+  margin: 0 auto; /* Center the container */
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--uv-border-color, #282828);
+  border-radius: 12px;
+  padding: 16px;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+/* The issue is that you're trying to apply styles to an ID on the container,
+   but the container doesn't have these IDs. Let's adjust the selectors to
+   target the correct elements. */
+
+.legend-descriptions p#low {
+  --uv-border-color: var(--uv-low);
+}
+
+.legend-descriptions p#moderate {
+  --uv-border-color: var(--uv-moderate);
+}
+
+.legend-descriptions p#high {
+  --uv-border-color: var(--uv-high);
+}
+
+.legend-descriptions p#very-high {
+  --uv-border-color: var(--uv-very-high);
+}
+
+.legend-descriptions p#extreme {
+  --uv-border-color: var(--uv-extreme);
+}
+
+/* Now, let's make sure the border color is applied when the description is active */
+.legend-descriptions p.active {
+  border: 2px solid var(--uv-border-color, #282828);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 10px;
+}
+
+/* Remove the border from the container */
+.legend-descriptions {
+  border: none;
+}

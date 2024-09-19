@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UV Checker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+  </head>
+
+  <body>
+    <div class="card"></div>
+    <h1>UV Index Manila</h1>
+    <div class="location">
+      <p>Manila, Philippines</p>
+      <p>
+        <%= new Date().toLocaleString("en-US", { timeZone: "Asia/Manila",
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour:
+        'numeric', minute: 'numeric', hour12: true }) %>
+      </p>
+    </div>
+    <div class="uv-index-container">
+      <p class="uv-index-label">Current UV Index</p>
+      <div class="uv-index <%= uvClass %>">
+        <p class="uv-index-value"><%= id %></p>
+      </div>
+    </div>
+
+    <div class="legend">
+      <h2>Legend</h2>
+      <div class="legend-items">
+        <button class="legend-button active" data-index="low">Low</button>
+        <button class="legend-button" data-index="moderate">Moderate</button>
+        <button class="legend-button" data-index="high">High</button>
+        <button class="legend-button" data-index="very-high">Very High</button>
+        <button class="legend-button" data-index="extreme">Extreme</button>
+      </div>
+    </div>
+    <div class="legend-descriptions">
+      <p id="low" class="description">
+        Minimal risk of harm from unprotected sun exposure. Enjoy outdoor
+        activities safely with basic precautions, such as wearing sunglasses and
+        applying sunscreen if you have sensitive skin.
+      </p>
+      <p id="moderate" class="description">
+        Moderate risk of harm from unprotected sun exposure. It's advisable to
+        seek shade during midday hours, wear protective clothing, and apply
+        sunscreen with at least SPF 30.
+      </p>
+      <p id="high" class="description">
+        High risk of harm from unprotected sun exposure. Take extra precautions
+        by limiting time in the sun, especially between 10 a.m. and 4 p.m., and
+        ensure you're using broad-spectrum sunscreen.
+      </p>
+      <p id="very-high" class="description">
+        Very high risk of harm from unprotected sun exposure. Protective
+        measures are essential; seek shade, wear protective clothing, and
+        reapply sunscreen frequently. Avoid outdoor activities during peak sun
+        hours.
+      </p>
+      <p
+        id="extreme"
+        class="description <%= uvClass === 'extreme' ? 'active' : '' %>"
+      >
+        Extreme risk of harm from unprotected sun exposure. Take all precautions
+        seriously: avoid the sun as much as possible, use high-SPF sunscreen,
+        wear a wide-brimmed hat, and stay hydrated.
+      </p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const buttons = document.querySelectorAll(".legend-button");
+        const descriptions = document.querySelectorAll(".description");
+
+        buttons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const index = this.getAttribute("data-index");
+
+            buttons.forEach((btn) => btn.classList.remove("active"));
+            descriptions.forEach((desc) => desc.classList.remove("active"));
+
+            this.classList.add("active");
+            document.getElementById(index).classList.add("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
