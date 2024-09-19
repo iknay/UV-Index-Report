@@ -10,9 +10,11 @@ const config = {
     "Content-Type": "application/json",
     "x-access-token": api_key,
   },
+  timeout: 5000,
 };
 
 app.use(express.static("public"));
+app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
   try {
@@ -37,7 +39,9 @@ app.get("/", async (req, res) => {
     });
   } catch (error) {
     console.error(error.message);
-    res.status(500);
+    res
+      .status(500)
+      .render("error", { error: "An error occurred while fetching UV data" });
   }
 });
 
