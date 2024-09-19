@@ -3,10 +3,7 @@ import axios from "axios";
 
 const app = express();
 const port = process.env.PORT || 3000;
-const api_key = "openuv-27zrm14pwqg5-io";
-
-const api_url =
-  "https://api.openuv.io/api/v1/uv?lat=14.61&lng=121.00&alt=100&dt=2024-09-18T16:00:00.000Z";
+const api_key = process.env.API_KEY;
 
 const config = {
   headers: {
