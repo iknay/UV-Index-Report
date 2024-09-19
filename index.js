@@ -2,7 +2,7 @@ import express from "express";
 import axios from "axios";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const api_key = "openuv-27zrm14pwqg5-io";
 
 const api_url =
