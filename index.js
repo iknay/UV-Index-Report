@@ -10,11 +10,9 @@ const config = {
     "Content-Type": "application/json",
     "x-access-token": api_key,
   },
-  timeout: 5000,
 };
 
 app.use(express.static("public"));
-app.set("view engine", "ejs");
 
 app.get("/", async (req, res) => {
   try {
