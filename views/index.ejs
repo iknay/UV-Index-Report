@@ -74,8 +74,6 @@
       document.addEventListener("DOMContentLoaded", function () {
         const buttons = document.querySelectorAll(".legend-button");
         const descriptions = document.querySelectorAll(".description");
-        const uvIndexValue = document.querySelector(".uv-index-value");
-        const uvIndexContainer = document.querySelector(".uv-index");
 
         buttons.forEach((button) => {
           button.addEventListener("click", function () {
@@ -88,24 +86,6 @@
             document.getElementById(index).classList.add("active");
           });
         });
-
-        // WebSocket connection
-        const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-        const ws = new WebSocket(`${protocol}//${window.location.host}`);
-
-        ws.onmessage = function (event) {
-          const data = JSON.parse(event.data);
-          uvIndexValue.textContent = data.id;
-          uvIndexContainer.className = `uv-index ${data.uvClass}`;
-        };
-
-        ws.onerror = function (error) {
-          console.error("WebSocket error:", error);
-        };
-
-        ws.onclose = function () {
-          console.log("WebSocket connection closed");
-        };
       });
     </script>
   </body>
